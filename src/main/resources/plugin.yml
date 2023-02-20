@@ -4,3 +4,5 @@ main: br.com.rabbithole.auth.Auth
 api-version: 1.19
 authors: [ FelipeSz_19 ]
 description: Auth Provider for Rabbit Hole
+depend:
+  - Permissions
