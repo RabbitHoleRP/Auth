@@ -1,10 +1,10 @@
 package br.com.rabbithole.auth;
 
 import br.com.rabbithole.WarnUtils;
+import br.com.rabbithole.auth.data.cache.SessionProcessMethods;
 import br.com.rabbithole.auth.data.storage.LoginProcessStorage;
 import br.com.rabbithole.auth.events.PreLoginEvent;
 import br.com.rabbithole.core.WarnExecutor;
-import br.com.rabbithole.core.enums.Warn;
 import br.com.rabbithole.permissions.Permissions;
 import br.com.rabbithole.permissions.PermissionsAPI;
 import org.bukkit.event.HandlerList;
@@ -13,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Auth extends JavaPlugin {
     private static final AuthAPI API = new AuthAPI();
     private static LoginProcessStorage loginProcessStorage;
+    private static SessionProcessMethods sessionMethods;
 
 
     @Override
@@ -33,8 +34,8 @@ public final class Auth extends JavaPlugin {
         commands();
         events();
         loginProcessStorage = new LoginProcessStorage();
+        sessionMethods = new SessionProcessMethods();
         WarnUtils.warnInitializer("Auth");
-        WarnUtils.getWarn().sendWarn(Warn.UPDATE_DATABASE_ERROR);
     }
 
     void commands() {}
@@ -57,5 +58,9 @@ public final class Auth extends JavaPlugin {
 
     public static LoginProcessStorage getLoginProcessStorage() {
         return loginProcessStorage;
+    }
+
+    public static SessionProcessMethods getSessionMethods() {
+        return sessionMethods;
     }
 }

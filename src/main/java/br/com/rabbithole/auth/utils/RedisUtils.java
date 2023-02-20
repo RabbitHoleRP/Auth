@@ -25,6 +25,37 @@ public class RedisUtils {
             return true;
         } catch (Exception exception) {
             Auth.getWarn().sendWarn(Warn.DELETE_CACHE_ERROR);
+            exception.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean existsQuery(String key) {
+        try (Jedis jedis = RedisConfiguration.getJedis().getResource()) {
+            return jedis.exists(key);
+        } catch (Exception exception) {
+            Auth.getWarn().sendWarn(Warn.CHECK_CACHE_ERROR);
+            exception.printStackTrace();
+            return false;
+        }
+    }
+
+    public static Optional<String> getQuery(String key) {
+        try (Jedis jedis = RedisConfiguration.getJedis().getResource()) {
+            return Optional.of(jedis.get(key));
+        } catch (Exception exception) {
+            Auth.getWarn().sendWarn(Warn.GET_CACHE_ERROR);
+            return Optional.empty();
+        }
+    }
+
+    public static boolean expireQuery(String key, int seconds) {
+        try (Jedis jedis = RedisConfiguration.getJedis().getResource()) {
+            jedis.expire(key, seconds);
+            return true;
+        } catch (Exception exception) {
+            Auth.getWarn().sendWarn(Warn.CHECK_CACHE_ERROR);
+            exception.printStackTrace();
             return false;
         }
     }

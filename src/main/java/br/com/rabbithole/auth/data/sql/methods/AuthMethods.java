@@ -50,6 +50,7 @@ public class AuthMethods {
         return false;
     }
 
+    //TODO: FOR FUTURE FEATURE
     public static boolean checkIp(String nick, String ip) {
         try (AuthTable account = new AuthTable(nick)) {
             if (account.find()) {

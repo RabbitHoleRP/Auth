@@ -6,7 +6,7 @@
 
     <groupId>br.com.rabbithole</groupId>
     <artifactId>Auth</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Auth</name>
@@ -118,7 +118,7 @@
         <dependency>
             <groupId>br.com.rabbithole</groupId>
             <artifactId>WarnLib</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
