@@ -29,6 +29,8 @@ public class PreLoginEvent implements Listener {
 
         if (Auth.getSessionMethods().checkPlayerSession(event.getName(), event.getAddress().toString())) {
             loginProcess.setLogged(true);
+        } else {
+            Auth.getSessionMethods().forceClosePlayerSession(event.getName());
         }
 
         Auth.getLoginProcessStorage().addItemToStorage(event.getName(), loginProcess);

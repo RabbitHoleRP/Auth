@@ -19,10 +19,6 @@ public class AuthMethods {
         }
     }
 
-    public static boolean updateAccount(String nick) {
-        return false;
-    }
-
     public static boolean updatePassword(String nick, String password) {
         try (AuthTable account = new AuthTable(nick)) {
             if (account.find()) {

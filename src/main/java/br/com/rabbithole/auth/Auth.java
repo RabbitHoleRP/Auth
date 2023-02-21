@@ -14,19 +14,20 @@ public final class Auth extends JavaPlugin {
     private static final AuthAPI API = new AuthAPI();
     private static LoginProcessStorage loginProcessStorage;
     private static SessionProcessMethods sessionMethods;
+    private static WarnUtils warn;
 
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        WarnUtils.getWarn().sendWarn("<green>[Auth] iniciado com Sucesso!");
+        getWarn().sendWarn("<green>[Auth] iniciado com Sucesso!");
         registers();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        WarnUtils.getWarn().sendWarn("<red>[Auth] desativado com Sucesso!");
+        getWarn().sendWarn("<red>[Auth] desativado com Sucesso!");
         HandlerList.unregisterAll(this);
     }
 
@@ -35,7 +36,7 @@ public final class Auth extends JavaPlugin {
         events();
         loginProcessStorage = new LoginProcessStorage();
         sessionMethods = new SessionProcessMethods();
-        WarnUtils.warnInitializer("Auth");
+        warn = new WarnUtils("Auth");
     }
 
     void commands() {}
@@ -53,7 +54,7 @@ public final class Auth extends JavaPlugin {
     }
 
     public static WarnExecutor getWarn() {
-        return WarnUtils.getWarn();
+        return warn.getWarn();
     }
 
     public static LoginProcessStorage getLoginProcessStorage() {
