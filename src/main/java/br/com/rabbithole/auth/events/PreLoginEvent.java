@@ -26,6 +26,13 @@ public class PreLoginEvent implements Listener {
                 loginProcess = new LoginProcessEntity(false, false, event.getAddress(), 3);
             }
         }
+
+        if (Auth.getSessionMethods().checkPlayerSession(event.getName(), event.getAddress().toString())) {
+            loginProcess.setLogged(true);
+        } else {
+            Auth.getSessionMethods().forceClosePlayerSession(event.getName());
+        }
+
         Auth.getLoginProcessStorage().addItemToStorage(event.getName(), loginProcess);
     }
 }
