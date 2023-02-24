@@ -1,6 +1,8 @@
 package br.com.rabbithole.auth;
 
 import br.com.rabbithole.WarnUtils;
+import br.com.rabbithole.auth.configuration.RedisConfiguration;
+import br.com.rabbithole.auth.configuration.WormConfiguration;
 import br.com.rabbithole.auth.data.cache.SessionProcessMethods;
 import br.com.rabbithole.auth.data.storage.LoginProcessStorage;
 import br.com.rabbithole.auth.events.PreLoginEvent;
@@ -37,6 +39,8 @@ public final class Auth extends JavaPlugin {
         loginProcessStorage = new LoginProcessStorage();
         sessionMethods = new SessionProcessMethods();
         warn = new WarnUtils("Auth");
+        WormConfiguration.init(this);
+        RedisConfiguration.init(this);
     }
 
     void commands() {}
