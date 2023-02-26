@@ -4,6 +4,7 @@ import br.com.rabbithole.auth.Auth;
 import br.com.rabbithole.auth.data.sql.methods.AuthMethods;
 import br.com.rabbithole.auth.entities.LoginProcessEntity;
 import br.com.rabbithole.auth.utils.StringUtils;
+import br.com.rabbithole.core.enums.Warn;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -62,6 +63,7 @@ public class LoginCommand implements CommandExecutor {
         player.sendMessage(StringUtils.formatString("<green>Autenticado com Sucesso, Seja Bem-Vindo!"));
 
         loginProcess.setLogged(true);
+        if (!Auth.getSessionMethods().createPlayerSession(player.getName(), Objects.requireNonNull(player.getAddress()).toString())) Auth.getWarn().sendWarn(Warn.INSERT_CACHE_ERROR);
         Auth.getLoginProcessStorage().removeItemFromStorage(player.getName());
         return false;
     }
