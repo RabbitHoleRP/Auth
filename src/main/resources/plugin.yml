@@ -6,3 +6,10 @@ authors: [ FelipeSz_19 ]
 description: Auth Provider for Rabbit Hole
 depend:
   - Permissions
+commands:
+  register:
+    description: Register Players in System
+    aliases: [registrar]
+  login:
+    description: Auth Player in System
+    aliases: [logar]

@@ -4,10 +4,10 @@ import dev.gump.worm.WormField;
 import dev.gump.worm.WormTable;
 
 public class AuthTable extends WormTable {
-    @WormField(sqlName = "nick", sqlType = "VARCHAR", length = 16)
+    @WormField(sqlName = "nick", sqlType = "VARCHAR", length = 16, primaryKey = true)
     private String nick;
 
-    @WormField(sqlName = "uuid", sqlType = "VARCHAR", length = 32)
+    @WormField(sqlName = "uuid", sqlType = "VARCHAR", length = 36)
     private String uuid;
 
     @WormField(sqlName = "password", sqlType = "VARCHAR", length = 64)

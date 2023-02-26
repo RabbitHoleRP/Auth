@@ -1,10 +1,13 @@
 package br.com.rabbithole.auth;
 
 import br.com.rabbithole.WarnUtils;
+import br.com.rabbithole.auth.commands.user.LoginCommand;
+import br.com.rabbithole.auth.commands.user.RegisterCommand;
 import br.com.rabbithole.auth.configuration.RedisConfiguration;
 import br.com.rabbithole.auth.configuration.WormConfiguration;
 import br.com.rabbithole.auth.data.cache.SessionProcessMethods;
 import br.com.rabbithole.auth.data.storage.LoginProcessStorage;
+import br.com.rabbithole.auth.events.JoinEvent;
 import br.com.rabbithole.auth.events.PreLoginEvent;
 import br.com.rabbithole.core.WarnExecutor;
 import br.com.rabbithole.permissions.Permissions;
@@ -16,7 +19,7 @@ public final class Auth extends JavaPlugin {
     private static final AuthAPI API = new AuthAPI();
     private static LoginProcessStorage loginProcessStorage;
     private static SessionProcessMethods sessionMethods;
-    private static WarnUtils warn;
+    private static final WarnUtils warn = new WarnUtils("Auth");
 
 
     @Override
@@ -34,19 +37,23 @@ public final class Auth extends JavaPlugin {
     }
 
     void registers() {
+        saveDefaultConfig();
         commands();
         events();
         loginProcessStorage = new LoginProcessStorage();
         sessionMethods = new SessionProcessMethods();
-        warn = new WarnUtils("Auth");
         WormConfiguration.init(this);
         RedisConfiguration.init(this);
     }
 
-    void commands() {}
+    void commands() {
+        new RegisterCommand();
+        new LoginCommand();
+    }
 
     void events() {
         new PreLoginEvent(this);
+        new JoinEvent(this);
     }
 
     public static AuthAPI getAPI() {
@@ -67,5 +74,9 @@ public final class Auth extends JavaPlugin {
 
     public static SessionProcessMethods getSessionMethods() {
         return sessionMethods;
+    }
+
+    public static Auth getInstance() {
+        return Auth.getPlugin(Auth.class);
     }
 }

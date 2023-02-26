@@ -15,6 +15,10 @@ public class LoginProcessStorage {
         getStorage().put(nick, loginProcess);
     }
 
+    public void updateItemStoraged(String nick, LoginProcessEntity loginProcess) {
+        getStorage().put(nick, loginProcess);
+    }
+
     public boolean hasItemInStorage(String nick) {
         return getStorage().containsKey(nick);
     }
