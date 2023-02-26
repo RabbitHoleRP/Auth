@@ -19,6 +19,15 @@ public class AuthMethods {
         }
     }
 
+    public static boolean validateAccount(String nick, String password) {
+        try (AuthTable account = new AuthTable(nick)) {
+            if (account.find()) {
+                return SHA256.validatePassword(password, account.getPassword());
+            }
+            return false;
+        }
+    }
+
     public static boolean updatePassword(String nick, String password) {
         try (AuthTable account = new AuthTable(nick)) {
             if (account.find()) {
