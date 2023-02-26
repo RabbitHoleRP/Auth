@@ -3,6 +3,7 @@ package br.com.rabbithole.auth.events;
 import br.com.rabbithole.auth.Auth;
 import br.com.rabbithole.auth.data.sql.tables.AuthTable;
 import br.com.rabbithole.auth.entities.LoginProcessEntity;
+import br.com.rabbithole.core.enums.Warn;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
@@ -30,9 +31,8 @@ public class PreLoginEvent implements Listener {
         if (Auth.getSessionMethods().checkPlayerSession(event.getName(), event.getAddress().toString())) {
             loginProcess.setLogged(true);
         } else {
-            Auth.getSessionMethods().forceClosePlayerSession(event.getName());
+            if (!Auth.getSessionMethods().forceClosePlayerSession(event.getName())) Auth.getWarn().sendWarn(Warn.DELETE_CACHE_ERROR);
         }
-
         Auth.getLoginProcessStorage().addItemToStorage(event.getName(), loginProcess);
     }
 }
