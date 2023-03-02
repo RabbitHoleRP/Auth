@@ -13,3 +13,6 @@ commands:
   login:
     description: Auth Player in System
     aliases: [logar]
+  changepassword:
+    description: Update Player Password
+    aliases: [trocarsenha]

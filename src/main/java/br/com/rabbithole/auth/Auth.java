@@ -1,6 +1,7 @@
 package br.com.rabbithole.auth;
 
 import br.com.rabbithole.WarnUtils;
+import br.com.rabbithole.auth.commands.user.ChangePasswordCommand;
 import br.com.rabbithole.auth.commands.user.LoginCommand;
 import br.com.rabbithole.auth.commands.user.RegisterCommand;
 import br.com.rabbithole.auth.configuration.RedisConfiguration;
@@ -49,6 +50,7 @@ public final class Auth extends JavaPlugin {
     void commands() {
         new RegisterCommand();
         new LoginCommand();
+        new ChangePasswordCommand();
     }
 
     void events() {
